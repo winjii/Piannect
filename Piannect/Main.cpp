@@ -4,6 +4,7 @@ namespace Piannect {
 
 
 void Run() {
+	Window::Resize(1800, 900);
 	using namespace Piannect;
 	int n = MIDIIn_GetDeviceNum();
 	if (n == 0) throw "MIDIデバイスが接続されていない";

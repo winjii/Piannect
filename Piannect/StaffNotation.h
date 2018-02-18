@@ -11,6 +11,8 @@ private:
 
 	bool m_isBlack[12] = { 0, 1, 0, 1, 0, 0, 1, 0, 1, 0, 1, 0 };
 
+	bool m_isHalfStep[7] = { 0, 0, 1, 0, 0, 0, 1 };
+
 	double m_x, m_y, m_width, m_height;
 
 	double m_lineDiff;
