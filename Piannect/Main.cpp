@@ -10,6 +10,7 @@ void Main()
 		if (KeySpace.down()) {
 			sn.pushNote(60);
 			sn.pushNote(72);
+			sn.pushNote(73);
 			sn.pushNote(48);
 		}
 		sn.update();
