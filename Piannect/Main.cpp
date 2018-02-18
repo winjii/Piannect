@@ -5,13 +5,21 @@ namespace Piannect {
 
 void Run() {
 	using namespace Piannect;
+	int n = MIDIIn_GetDeviceNum();
+	if (n == 0) throw "MIDIデバイスが接続されていない";
+	wchar_t name[100];
+	MIDIIn_GetDeviceName(0, name, 100);
+	MIDIIn* midiIn = MIDIIn_Open(name);
 	StaffNotation sn(0, 0, Window::Width(), Window::Height());
 	while (System::Update()) {
-		if (KeySpace.down()) {
-			sn.pushNote(60);
-			sn.pushNote(72);
-			sn.pushNote(73);
-			sn.pushNote(48);
+		while (true) {
+			unsigned char m[256];
+			int lLen = MIDIIn_GetMIDIMessage(midiIn, m, 256);
+			if (lLen == 0) break;
+			if ((m[0] >> 4) == 9 && m[2] > 0) {
+				int key = m[1];
+				sn.pushNote(key);
+			}
 		}
 		sn.update();
 	}
@@ -35,7 +43,7 @@ void Main()
 	enum RunMode {
 		Run,
 		MidiioTest
-	} runMode = RunMode::MidiioTest;
+	} runMode = RunMode::Run;
 
 
 	Graphics2D::SetSamplerState(SamplerState::ClampLinear);
