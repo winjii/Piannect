@@ -6,17 +6,20 @@ namespace Piannect {
 
 
 double SimpleGame::getNoteOriginX() {
-	return m_startX + (m_endX - m_startX)*m_noteTransition.easeOut(Easing::Quart);
+	double value = m_noteTransition.value();
+	double r = m_noteTransition.easeOut(Easing::Quart);
+	return m_startX + (m_endX - m_startX)*r;
 }
 
 SimpleGame::SimpleGame(double x, double y, double width, double height)
 : StaffNotation(x, y, width, height)
 , m_notes()
-, m_deadlineX(x + 30)
-, m_noteInterval(20)
+, m_deadlineX(x + 100)
+, m_noteInterval(100)
 , m_startX()
 , m_endX()
-, m_noteTransition() {
+, m_noteTransition()
+, m_headNoteIndex(0) {
 	m_startX = m_deadlineX + m_noteInterval;
 	m_endX = m_deadlineX + m_noteInterval;
 	m_noteTransition = Transition(0s, 0s);
@@ -24,18 +27,19 @@ SimpleGame::SimpleGame(double x, double y, double width, double height)
 
 void SimpleGame::push(int key) {
 	if (m_notes.front() != key) return;
-	m_notes.pop_front();
-	m_noteTransition = Transition(0.5s, 0s);
 	m_startX = getNoteOriginX();
-	m_endX = m_deadlineX + m_noteInterval;
+	m_endX = m_deadlineX - m_headNoteIndex*m_lineDiff;
+	m_headNoteIndex++;
+	m_noteTransition = Transition(3s, 0s);
 }
 
 void SimpleGame::update() {
 	StaffNotation::update();
 	m_noteTransition.update(true);
 	double noteOrigin = getNoteOriginX();
-	if (noteOrigin < m_deadlineX + 1e-10) {
+	if (noteOrigin - m_lineDiff/2 < m_deadlineX) {
 		m_notes.pop_front();
+		m_headNoteIndex = std::max(0, m_headNoteIndex - 1);
 		noteOrigin += m_noteInterval;
 		m_startX += m_noteInterval;
 		m_endX += m_noteInterval;

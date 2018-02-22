@@ -30,7 +30,7 @@ void KeyboardView::turnOff(int key) {
 }
 
 void KeyboardView::update() {
-	const int whiteCount = 7*6 + 1;
+	const int whiteCount = 5*7 + 1;
 	double whiteWidth = m_width/whiteCount;
 	constexpr int whiteKey[7] = { 0, 2, 4, 5, 7, 9, 11 };
 	constexpr int blackKey[6] = { 1, 3, -1, 6, 8, 10 }; //3Ç¬ñ⁄ÇÕñ≥ÇÃçïåÆ
@@ -40,7 +40,7 @@ void KeyboardView::update() {
 		RectF(m_x + whiteWidth*i, m_y, whiteWidth, m_height).draw(color).drawFrame(1, Palette::Black);
 	}
 	double blackWidth = whiteWidth*0.45;
-	for (int i = 0; i < 6; i++) {
+	for (int i = 0; i < 5; i++) {
 		for (int j = 0; j < 6; j++) {
 			if (j == 2) continue;
 			int key = i*12 + blackKey[j];

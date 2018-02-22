@@ -19,6 +19,8 @@ private:
 
 	Transition m_noteTransition;
 
+	int m_headNoteIndex;
+
 
 	double getNoteOriginX();
 
