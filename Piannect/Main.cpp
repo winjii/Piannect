@@ -1,6 +1,7 @@
 ﻿#include "StaffNotation.h"
 #include "KeyboardView.h"
 #include "NoteView.h"
+#include "SimpleGame.h"
 
 namespace Piannect {
 
@@ -13,7 +14,8 @@ void Run() {
 	wchar_t name[100];
 	MIDIIn_GetDeviceName(0, name, 100);
 	MIDIIn* midiIn = MIDIIn_Open(name);
-	NoteView nv(0, 0, Window::Width(), Window::Height());
+	SimpleGame sg(0, 0, Window::Width(), Window::Height()*0.7);
+	KeyboardView kv(0, Window::Height()*0.7, Window::Width(), Window::Height()*0.3);
 	while (System::Update()) {
 		while (true) {
 			unsigned char m[256];
@@ -21,10 +23,16 @@ void Run() {
 			if (lLen == 0) break;
 			if ((m[0] >> 4) == 9 && m[2] > 0) {
 				int key = m[1];
-				nv.pushNote(key);
+				sg.push(key);
+				kv.turnOn(key);
+			}
+			if (((m[0] >> 4) == 9 && m[2] == 0) || (m[0] >> 4) == 8) {
+				int key = m[1];
+				kv.turnOff(key);
 			}
 		}
-		nv.update();
+		sg.update();
+		kv.update();
 	}
 	MIDIIn_Close(midiIn);
 }
@@ -46,6 +54,13 @@ void KeyboardViewTest() {
 	}
 }
 
+void SimpleGameTest() {
+	SimpleGame sg(0, 0, Window::Width(), Window::Height());
+	while (System::Update()) {
+		sg.update();
+	}
+}
+
 
 }
 
@@ -54,7 +69,8 @@ void Main()
 	enum RunMode {
 		Run,
 		MidiioTest,
-		KeyboardViewTest
+		KeyboardViewTest,
+		SimpleGameTest
 	} runMode = RunMode::Run;
 
 
@@ -70,6 +86,8 @@ void Main()
 		break;
 	case KeyboardViewTest:
 		Piannect::KeyboardViewTest();
+	case SimpleGameTest:
+		Piannect::SimpleGameTest();
 	default:
 		break;
 	}
