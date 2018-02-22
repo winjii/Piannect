@@ -21,9 +21,11 @@ protected:
 
 	double m_noteY[128];
 
-	public:
+public:
 
 	StaffNotation(double x, double y, double width, double height);
+
+	virtual void update();
 };
 
 
