@@ -203,6 +203,8 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="KeyboardUtil.cpp" />
+    <ClCompile Include="KeyboardView.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="StaffNotation.cpp" />
     <ClCompile Include="stdafx.cpp">
@@ -264,6 +266,8 @@
     <Text Include="App\example\test.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="KeyboardUtil.h" />
+    <ClInclude Include="KeyboardView.h" />
     <ClInclude Include="StaffNotation.h" />
     <ClInclude Include="stdafx.h" />
   </ItemGroup>

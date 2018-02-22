@@ -1,4 +1,5 @@
 ﻿#include "StaffNotation.h"
+#include "KeyboardView.h"
 
 namespace Piannect {
 
@@ -37,6 +38,13 @@ void MidiioTest() {
 	}
 }
 
+void KeyboardViewTest() {
+	KeyboardView kv(0, 0, Window::Width(), Window::Height());
+	while (System::Update()) {
+		kv.update();
+	}
+}
+
 
 }
 
@@ -44,8 +52,9 @@ void Main()
 {
 	enum RunMode {
 		Run,
-		MidiioTest
-	} runMode = RunMode::Run;
+		MidiioTest,
+		KeyboardViewTest
+	} runMode = RunMode::KeyboardViewTest;
 
 
 	Graphics2D::SetSamplerState(SamplerState::ClampLinear);
@@ -58,6 +67,8 @@ void Main()
 	case MidiioTest:
 		Piannect::MidiioTest();
 		break;
+	case KeyboardViewTest:
+		Piannect::KeyboardViewTest();
 	default:
 		break;
 	}
