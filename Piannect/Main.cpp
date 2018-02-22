@@ -1,5 +1,6 @@
 ﻿#include "StaffNotation.h"
 #include "KeyboardView.h"
+#include "NoteView.h"
 
 namespace Piannect {
 
@@ -12,7 +13,7 @@ void Run() {
 	wchar_t name[100];
 	MIDIIn_GetDeviceName(0, name, 100);
 	MIDIIn* midiIn = MIDIIn_Open(name);
-	StaffNotation sn(0, 0, Window::Width(), Window::Height());
+	NoteView nv(0, 0, Window::Width(), Window::Height());
 	while (System::Update()) {
 		while (true) {
 			unsigned char m[256];
@@ -20,10 +21,10 @@ void Run() {
 			if (lLen == 0) break;
 			if ((m[0] >> 4) == 9 && m[2] > 0) {
 				int key = m[1];
-				sn.pushNote(key);
+				nv.pushNote(key);
 			}
 		}
-		sn.update();
+		nv.update();
 	}
 	MIDIIn_Close(midiIn);
 }
@@ -54,7 +55,7 @@ void Main()
 		Run,
 		MidiioTest,
 		KeyboardViewTest
-	} runMode = RunMode::KeyboardViewTest;
+	} runMode = RunMode::Run;
 
 
 	Graphics2D::SetSamplerState(SamplerState::ClampLinear);

@@ -206,6 +206,7 @@
     <ClCompile Include="KeyboardUtil.cpp" />
     <ClCompile Include="KeyboardView.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="NoteView.cpp" />
     <ClCompile Include="StaffNotation.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
@@ -268,6 +269,7 @@
   <ItemGroup>
     <ClInclude Include="KeyboardUtil.h" />
     <ClInclude Include="KeyboardView.h" />
+    <ClInclude Include="NoteView.h" />
     <ClInclude Include="StaffNotation.h" />
     <ClInclude Include="stdafx.h" />
   </ItemGroup>
