@@ -26,6 +26,7 @@ StaffNotation::StaffNotation(double x, double y, double width, double height)
 }
 
 void StaffNotation::update() {
+	RectF(m_x, m_y, m_width, m_height).draw(Palette::White);
 	Color halfStepColor = HSV(0, 0.1, 1);
 	for (int i = 0; ; i++) {
 		double y = m_centerY - i*m_lineDiff/2;
