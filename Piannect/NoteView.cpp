@@ -16,7 +16,7 @@ void NoteView::pushNote(int key) {
 	m_notes.push_front(std::pair<int, double>(key, 0));
 }
 
-void NoteView::update() {
+void NoteView::update() override {
 	StaffNotation::update();
 
 	for (auto itr = m_notes.begin(); itr != m_notes.end();) {

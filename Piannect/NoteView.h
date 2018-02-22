@@ -17,7 +17,7 @@ public:
 
 	void pushNote(int key);
 
-	void update();
+	void update() override;
 };
 
 
