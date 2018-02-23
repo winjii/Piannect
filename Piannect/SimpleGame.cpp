@@ -26,7 +26,7 @@ SimpleGame::SimpleGame(double x, double y, double width, double height)
 }
 
 void SimpleGame::push(int key) {
-	if (m_notes.front() != key) return;
+	if (m_notes[m_headNoteIndex] != key) return;
 	m_startX = getNoteOriginX();
 	m_endX = m_deadlineX - m_headNoteIndex*m_noteInterval;
 	m_headNoteIndex++;
