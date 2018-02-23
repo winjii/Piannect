@@ -28,18 +28,18 @@ SimpleGame::SimpleGame(double x, double y, double width, double height)
 void SimpleGame::push(int key) {
 	if (m_notes.front() != key) return;
 	m_startX = getNoteOriginX();
-	m_endX = m_deadlineX - m_headNoteIndex*m_lineDiff;
+	m_endX = m_deadlineX - m_headNoteIndex*m_noteInterval;
 	m_headNoteIndex++;
-	m_noteTransition = Transition(3s, 0s);
+	m_noteTransition = Transition(5s, 0s);
 }
 
 void SimpleGame::update() {
 	StaffNotation::update();
 	m_noteTransition.update(true);
 	double noteOrigin = getNoteOriginX();
-	if (noteOrigin - m_lineDiff/2 < m_deadlineX) {
+	while (noteOrigin - m_lineDiff/2 < m_deadlineX) {
 		m_notes.pop_front();
-		m_headNoteIndex = std::max(0, m_headNoteIndex - 1);
+		m_headNoteIndex--;
 		noteOrigin += m_noteInterval;
 		m_startX += m_noteInterval;
 		m_endX += m_noteInterval;
@@ -54,7 +54,16 @@ void SimpleGame::update() {
 			newKey = std::max(60 - 12*2, std::min(newKey, 60 + 3*21 + 1));
 			m_notes.push_back(newKey);
 		}
-		Circle(x, m_noteY[m_notes[i]], m_lineDiff/2).draw(Palette::Black);
+		if (i < m_headNoteIndex) {
+			Circle(x, m_noteY[m_notes[i]], m_lineDiff/2).draw(Palette::Red);
+		}
+		else if (m_isBlack[m_notes[i] % 12]) {
+			Circle(x, m_noteY[m_notes[i]], m_lineDiff/2).draw(Palette::Black);
+		}
+		else {
+			Circle(x, m_noteY[m_notes[i]], m_lineDiff/2).draw(Palette::White);
+			Circle(x, m_noteY[m_notes[i]], m_lineDiff/2).drawFrame(2, Palette::Black);
+		}
 	}
 }
 
