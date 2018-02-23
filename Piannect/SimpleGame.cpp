@@ -51,7 +51,7 @@ void SimpleGame::update() {
 			if (m_x + m_width + m_lineDiff/2 < x) break;
 			int lastKey = (m_notes.size() == 0 ? 60 : m_notes.back());
 			int newKey = lastKey - m_nextRange + Random(m_nextRange*2);
-			newKey = std::max(60 - 12*2, std::min(newKey, 60 + 3*21 + 1));
+			newKey = std::max(60 - 12*2, std::min(newKey, 60 + 3*12 + 1));
 			m_notes.push_back(newKey);
 		}
 		if (i < m_headNoteIndex) {
