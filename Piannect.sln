@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.27130.2010
+VisualStudioVersion = 15.0.27130.2036
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Piannect", "Piannect\Piannect.vcxproj", "{2680AF1B-D5B0-43A6-AE62-0D26C05B6199}"
 EndProject
@@ -24,9 +24,11 @@ Global
 		{2680AF1B-D5B0-43A6-AE62-0D26C05B6199}.Release|x86.ActiveCfg = Release|Win32
 		{2680AF1B-D5B0-43A6-AE62-0D26C05B6199}.Release|x86.Build.0 = Release|Win32
 		{8633E7D7-313B-4667-A728-C2B714244B76}.Debug|x64.ActiveCfg = Debug|Win32
+		{8633E7D7-313B-4667-A728-C2B714244B76}.Debug|x64.Build.0 = Debug|Win32
 		{8633E7D7-313B-4667-A728-C2B714244B76}.Debug|x86.ActiveCfg = Debug|Win32
 		{8633E7D7-313B-4667-A728-C2B714244B76}.Debug|x86.Build.0 = Debug|Win32
 		{8633E7D7-313B-4667-A728-C2B714244B76}.Release|x64.ActiveCfg = Release|Win32
+		{8633E7D7-313B-4667-A728-C2B714244B76}.Release|x64.Build.0 = Release|Win32
 		{8633E7D7-313B-4667-A728-C2B714244B76}.Release|x86.ActiveCfg = Release|Win32
 		{8633E7D7-313B-4667-A728-C2B714244B76}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
