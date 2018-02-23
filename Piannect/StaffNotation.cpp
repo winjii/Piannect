@@ -31,8 +31,8 @@ void StaffNotation::update() {
 	for (int i = 0; ; i++) {
 		double y = m_centerY - i*m_lineDiff/2;
 		if (y < m_y) break;
-		//if ((i&1) == 0)
-		Line(m_x, y, m_x + m_width, y).draw(0.3, Palette::Gray);
+		if ((i&1) == 0)
+			Line(m_x, y, m_x + m_width, y).draw(0.3, Palette::Gray);
 		if (m_isHalfStep[i % 7]) {
 			RectF(m_x, y - m_lineDiff/2, m_width, m_lineDiff/2).draw(halfStepColor);
 		}
@@ -40,8 +40,8 @@ void StaffNotation::update() {
 	for (int i = 1; ; i++) {
 		double y = m_centerY + i*m_lineDiff/2;
 		if (y > m_y + m_height) break;
-		//if ((i&1) == 0)
-		Line(m_x, y, m_x + m_width, y).draw(0.3, Palette::Gray);
+		if ((i&1) == 0)
+			Line(m_x, y, m_x + m_width, y).draw(0.3, Palette::Gray);
 		if (m_isHalfStep[(7 - i % 7) % 7]) {
 			RectF(m_x, y - m_lineDiff/2, m_width, m_lineDiff/2).draw(halfStepColor);
 		}
