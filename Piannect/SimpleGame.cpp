@@ -38,7 +38,7 @@ void SimpleGame::update() {
 	auto randomSelect = [&](const std::vector<std::pair<int, int>> &ranges) {
 		int sum = 0;
 		for (int i = 0; i < (int)ranges.size(); i++) sum += ranges[i].second - ranges[i].first;
-		int rand = Random(sum);
+		int rand = Random(sum - 1);
 		for (int i = 0; i < (int)ranges.size(); i++) {
 			if (rand < ranges[i].second - ranges[i].first) return rand + ranges[i].first;
 			rand -= ranges[i].second - ranges[i].first;
