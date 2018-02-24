@@ -36,7 +36,7 @@ void KeyboardView::update() {
 	constexpr int blackKey[6] = { 1, 3, -1, 6, 8, 10 }; //3‚Â–Ú‚Í–³‚Ì•Œ®
 	for (int i = 0; i < whiteCount; i++) {
 		int key = (i/7)*12 + whiteKey[i % 7];
-		Color color = m_isOn[key] ? Palette::Red : Palette::White;
+		Color color = m_isOn[key] ? Palette::Red : ((i/7)&1 ? Color(215) : Palette::White);
 		RectF(m_x + whiteWidth*i, m_y, whiteWidth, m_height).draw(color).drawFrame(1, Palette::Black);
 	}
 	double blackWidth = whiteWidth*0.45;
