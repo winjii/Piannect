@@ -34,6 +34,18 @@ void SimpleGame::push(int key) {
 }
 
 void SimpleGame::update() {
+	//ranges: ”¼ŠJ‹æŠÔ
+	auto randomSelect = [&](const std::vector<std::pair<int, int>> &ranges) {
+		int sum = 0;
+		for (int i = 0; i < (int)ranges.size(); i++) sum += ranges[i].second - ranges[i].first;
+		int rand = Random(sum);
+		for (int i = 0; i < (int)ranges.size(); i++) {
+			if (rand < ranges[i].second - ranges[i].first) return rand + ranges[i].first;
+			rand -= ranges[i].second - ranges[i].first;
+		}
+		return -1;
+	};
+
 	StaffNotation::update();
 	m_noteTransition.update(true);
 	double noteOrigin = getNoteOriginX();
@@ -50,8 +62,10 @@ void SimpleGame::update() {
 		if (m_notes.size() == i) {
 			if (m_x + m_width + m_lineDiff/2 < x) break;
 			int lastKey = (m_notes.size() == 0 ? 60 : m_notes.back());
-			int newKey = lastKey - m_nextRange + Random(m_nextRange*2);
-			newKey = std::max(60 - 12*2, std::min(newKey, 60 + 3*12 + 1));
+			using pii = std::pair<int, int>;
+			pii r1(60 - 2*12, std::max(60 - 2*12, lastKey + 1 - 12));
+			pii r2(std::min(lastKey + 12, 60 + 3*12 + 1), 60 + 3*12 + 1);
+			int newKey = randomSelect({r1, r2});
 			m_notes.push_back(newKey);
 		}
 		if (i < m_headNoteIndex) {
