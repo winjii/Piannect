@@ -21,6 +21,8 @@ protected:
 
 	double m_noteY[128];
 
+	int m_bottomKey, m_topKey;
+
 public:
 
 	StaffNotation(double x, double y, double width, double height);
