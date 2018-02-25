@@ -29,7 +29,8 @@ StaffNotation::StaffNotation(double x, double y, double width, double height)
 
 void StaffNotation::update() {
 	for (int i = std::max(0, m_bottomKey - 1); i <= m_topKey; i++) {
-		Color color = ((i/12)&1) ? Color(215) : Palette::White;
+		//オクターブごとに色を付けるか選択できるようにすべき
+		Color color = /*((i/12)&1)*/false ? Color(215) : Palette::White;
 		RectF(m_x, m_noteY[i] - m_lineDiff/2, m_width, m_lineDiff/2).draw(color);
 	}
 
