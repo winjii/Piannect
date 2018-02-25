@@ -21,8 +21,19 @@ private:
 
 	int m_headNoteIndex;
 
+	std::deque<double> m_correctTimes[128];
+
+	double m_averageTimes[128];
+
+	Stopwatch m_watch;
+
+	Array<int> m_blacklist;
+
+
 
 	double getNoteOriginX();
+
+	void maintainBlacklist();
 
 public:
 
