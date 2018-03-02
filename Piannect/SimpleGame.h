@@ -7,7 +7,7 @@ namespace Piannect {
 class SimpleGame : StaffNotation {
 private:
 
-	const int m_nextRange = 8;
+	const double m_timeLimit = 3.0;
 
 	std::deque<int> m_notes;
 

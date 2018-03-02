@@ -60,7 +60,7 @@ void SimpleGame::push(int key) {
 	while (m_correctTimes[key].size() > 3) m_correctTimes[key].pop_front();
 	for (int i = 0; i < (int)m_correctTimes[key].size(); i++) m_averageTimes[key] += m_correctTimes[key][i];
 	m_averageTimes[key] /= m_correctTimes[key].size();
-	if (m_averageTimes[key] < 3.0 && m_correctTimes[key].size() == 3) {
+	if (m_averageTimes[key] < m_timeLimit && m_correctTimes[key].size() == 3) {
 		auto itr = std::find(m_blacklist.begin(), m_blacklist.end(), key);
 		if (itr != m_blacklist.end()) {
 			m_blacklist.erase(itr);
@@ -127,6 +127,10 @@ void SimpleGame::update() {
 		else {
 			Circle(x, m_noteY[m_notes[i]], m_lineDiff/2).draw(Palette::White);
 			Circle(x, m_noteY[m_notes[i]], m_lineDiff/2).drawFrame(2, Palette::Black);
+		}
+		if (i == m_headNoteIndex) {
+			double t = std::min(1.0, m_watch.sF()/m_timeLimit);
+			Circle(x, m_noteY[m_notes[i]], EaseIn(Easing::Cubic, 300.0, m_lineDiff/2, t)).drawFrame(1, Palette::Black);
 		}
 	}
 }
