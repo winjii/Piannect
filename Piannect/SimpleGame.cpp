@@ -34,7 +34,7 @@ SimpleGame::SimpleGame(double x, double y, double width, double height)
 : StaffNotation(x, y, width, height)
 , m_notes()
 , m_deadlineX(x + 100)
-, m_noteInterval(300)
+, m_noteInterval(width/3)
 , m_startX()
 , m_endX()
 , m_noteTransition()
@@ -60,7 +60,7 @@ void SimpleGame::push(int key) {
 	while (m_correctTimes[key].size() > 3) m_correctTimes[key].pop_front();
 	for (int i = 0; i < (int)m_correctTimes[key].size(); i++) m_averageTimes[key] += m_correctTimes[key][i];
 	m_averageTimes[key] /= m_correctTimes[key].size();
-	if (m_averageTimes[key] < 10.0 && m_correctTimes[key].size() == 3) {
+	if (m_averageTimes[key] < 3.0 && m_correctTimes[key].size() == 3) {
 		auto itr = std::find(m_blacklist.begin(), m_blacklist.end(), key);
 		if (itr != m_blacklist.end()) {
 			m_blacklist.erase(itr);
