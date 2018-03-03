@@ -30,7 +30,7 @@ void SimpleGame::maintainBlacklist() {
 	}
 }
 
-SimpleGame::SimpleGame(double x, double y, double width, double height)
+SimpleGame::SimpleGame(double x, double y, double width, double height, bool modMode)
 : StaffNotation(x, y, width, height)
 , m_notes()
 , m_deadlineX(x + 100)
@@ -42,7 +42,8 @@ SimpleGame::SimpleGame(double x, double y, double width, double height)
 , m_correctTimes()
 , m_averageTimes()
 , m_watch(true)
-, m_blacklist() {
+, m_blacklist()
+, m_modMode(modMode) {
 	m_startX = m_deadlineX + m_noteInterval;
 	m_endX = m_deadlineX + m_noteInterval;
 	m_noteTransition = Transition(0s, 0s);
@@ -54,7 +55,15 @@ SimpleGame::SimpleGame(double x, double y, double width, double height)
 }
 
 void SimpleGame::push(int key) {
-	if (m_notes.size() <= m_headNoteIndex || m_notes[m_headNoteIndex] != key) return;
+	if (m_notes.size() <= m_headNoteIndex) return;
+	if (m_modMode) {
+		if (m_notes[m_headNoteIndex] % 12 != key % 12) return;
+	}
+	else {
+		if (m_notes[m_headNoteIndex] != key) return;
+	}
+	
+	key = m_notes[m_headNoteIndex];
 	m_correctTimes[key].push_back(m_watch.sF());
 	m_averageTimes[key] = 0.0;
 	while (m_correctTimes[key].size() > 3) m_correctTimes[key].pop_front();
@@ -130,7 +139,7 @@ void SimpleGame::update() {
 		}
 		if (i == m_headNoteIndex) {
 			double t = std::min(1.0, m_watch.sF()/m_timeLimit);
-			Circle(x, m_noteY[m_notes[i]], EaseIn(Easing::Cubic, 300.0, m_lineDiff/2, t)).drawFrame(1, Palette::Black);
+			//Circle(x, m_noteY[m_notes[i]], EaseIn(Easing::Cubic, 300.0, m_lineDiff/2, t)).drawFrame(1, Palette::Black);
 		}
 	}
 }

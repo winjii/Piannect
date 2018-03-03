@@ -29,6 +29,8 @@ private:
 
 	Array<int> m_blacklist;
 
+	bool m_modMode;
+
 
 
 	double getNoteOriginX();
@@ -37,7 +39,9 @@ private:
 
 public:
 
-	SimpleGame(double x, double y, double width, double height);
+	SimpleGame(double x, double y, double width, double height, bool modMode = false);
+
+	void setModMode(bool value);
 
 	void push(int key);
 
