@@ -12,7 +12,7 @@ double SimpleGame::getNoteOriginX() {
 }
 
 void SimpleGame::maintainBlacklist() {
-	if (m_blacklist.size() >= 5) return;
+	if (!m_usesBlackList || m_blacklist.size() >= 5) return;
 	bool blacklisted[128] = {};
 	for (int i = 0; i < (int)m_blacklist.size(); i++) {
 		blacklisted[m_blacklist[i]] = true;
@@ -30,7 +30,7 @@ void SimpleGame::maintainBlacklist() {
 	}
 }
 
-SimpleGame::SimpleGame(double x, double y, double width, double height, bool modMode)
+SimpleGame::SimpleGame(double x, double y, double width, double height, bool modMode, bool usesBlackList, bool skipMode)
 : StaffNotation(x, y, width, height)
 , m_notes()
 , m_deadlineX(x + 100)
@@ -43,7 +43,9 @@ SimpleGame::SimpleGame(double x, double y, double width, double height, bool mod
 , m_averageTimes()
 , m_watch(true)
 , m_blacklist()
-, m_modMode(modMode) {
+, m_modMode(modMode)
+, m_usesBlackList(usesBlackList)
+, m_skipMode(skipMode) {
 	m_startX = m_deadlineX + m_noteInterval;
 	m_endX = m_deadlineX + m_noteInterval;
 	m_noteTransition = Transition(0s, 0s);

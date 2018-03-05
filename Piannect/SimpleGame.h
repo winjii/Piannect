@@ -4,6 +4,7 @@
 namespace Piannect {
 
 
+//TODO: 音符生成アルゴリズムが複雑なので別のクラスに分離
 class SimpleGame : StaffNotation {
 private:
 
@@ -29,7 +30,11 @@ private:
 
 	Array<int> m_blacklist;
 
-	bool m_modMode;
+	const bool m_modMode;
+
+	const bool m_usesBlackList;
+
+	const bool m_skipMode; //TODO: これを使って場合分け
 
 
 
@@ -39,7 +44,7 @@ private:
 
 public:
 
-	SimpleGame(double x, double y, double width, double height, bool modMode = false);
+	SimpleGame(double x, double y, double width, double height, bool modMode = false, bool usesBlackList = true, bool skipMode = true);
 
 	void push(int key);
 
