@@ -226,7 +226,7 @@ KeyType::KeyType(Type type)
 }
 
 int KeyType::keyAsPosition(int key) {
-	return key/12 + m_keyAsPosition[key % 12];
+	return (key/12)*12 + m_keyAsPosition[key % 12];
 }
 
 bool KeyType::isUsedKey(int key) {

@@ -1,5 +1,6 @@
 #pragma once
 #include "StaffNotation.h"
+#include "KeyType.h"
 
 namespace Piannect {
 
@@ -36,6 +37,8 @@ private:
 
 	const bool m_skipMode; //TODO: ‚±‚ê‚ğg‚Á‚Äê‡•ª‚¯
 
+	const SP<KeyType> m_keyType;
+
 
 
 	double getNoteOriginX();
@@ -44,7 +47,8 @@ private:
 
 public:
 
-	SimpleGame(double x, double y, double width, double height, bool modMode = false, bool usesBlackList = true, bool skipMode = true);
+	//keyType: nullable
+	SimpleGame(double x, double y, double width, double height, SP<KeyType> keyType, bool modMode = false, bool usesBlackList = true, bool skipMode = true);
 
 	void push(int key);
 

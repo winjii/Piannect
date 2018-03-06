@@ -14,7 +14,7 @@ void Run() {
 	wchar_t name[100];
 	MIDIIn_GetDeviceName(0, name, 100);
 	MIDIIn* midiIn = MIDIIn_Open(name);
-	SimpleGame sg(0, 0, Window::Width(), Window::Height()*0.7, true);
+	SimpleGame sg(0, 0, Window::Width(), Window::Height()*0.7, SP<KeyType>(new KeyType(KeyType::Cs)), true, false, false);
 	KeyboardView kv(0, Window::Height()*0.7, Window::Width(), Window::Height()*0.3);
 	while (System::Update()) {
 		while (true) {
@@ -55,10 +55,12 @@ void KeyboardViewTest() {
 }
 
 void SimpleGameTest() {
+	/*
 	SimpleGame sg(0, 0, Window::Width(), Window::Height());
 	while (System::Update()) {
 		sg.update();
 	}
+	*/
 }
 
 

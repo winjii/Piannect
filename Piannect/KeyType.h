@@ -53,7 +53,7 @@ private:
 
 public:
 
-	KeyType(Type base);
+	KeyType(Type type);
 
 	//調に含まれるkeyでない場合は-1を返す
 	//調の影響で臨時記号を使わずに白鍵のように表示できる場合、その白鍵としてのkeyを返す
