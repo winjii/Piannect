@@ -40,6 +40,7 @@ public:
 		Bf_m,
 		B_m
 	};
+	static const int TypeCount = (int)Type::B_m + 1;
 
 private:
 
