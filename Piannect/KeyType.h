@@ -51,6 +51,8 @@ private:
 
 	std::vector<int> m_higherKeySignatures, m_lowerKeySignatures;
 
+	bool m_isSharp;
+
 public:
 
 	KeyType(Type type);
@@ -70,6 +72,8 @@ public:
 	//ƒw‰¹‹L†‘¤‚Ì’²‡‚ğkey‚Å•Ô‚·
 	//¶‚É‘‚©‚ê‚é‚×‚«’²‡‚©‚ç‡‚ÉŠi”[‚³‚ê‚é
 	const std::vector<int>& lowerKeySignatures();
+
+	bool isSharp();
 };
 
 

@@ -39,6 +39,10 @@ private:
 
 	const SP<KeyType> m_keyType;
 
+	Texture m_sharp;
+
+	Texture m_flat;
+
 
 
 	double getNoteOriginX();

@@ -34,8 +34,8 @@ void SimpleGame::maintainBlacklist() {
 SimpleGame::SimpleGame(double x, double y, double width, double height, SP<KeyType> keyType, bool modMode, bool usesBlackList, bool skipMode)
 : StaffNotation(x, y, width, height)
 , m_notes()
-, m_deadlineX(x + 100)
-, m_noteInterval(width/3)
+, m_deadlineX(x + 300)
+, m_noteInterval(skipMode ? width/3 : width/10)
 , m_startX()
 , m_endX()
 , m_noteTransition()
@@ -47,7 +47,10 @@ SimpleGame::SimpleGame(double x, double y, double width, double height, SP<KeyTy
 , m_modMode(modMode)
 , m_usesBlackList(usesBlackList)
 , m_skipMode(skipMode)
-, m_keyType(keyType) {
+, m_keyType(keyType)
+, m_sharp(U"sharp.png")
+, m_flat(U"flat.png") {
+
 	m_startX = m_deadlineX + m_noteInterval;
 	m_endX = m_deadlineX + m_noteInterval;
 	m_noteTransition = Transition(0s, 0s);
@@ -111,7 +114,25 @@ void SimpleGame::update() {
 		m_startX += m_noteInterval;
 		m_endX += m_noteInterval;
 	}
+
+	{
+		bool isSharp = m_keyType->isSharp();
+		Texture texture = isSharp ? m_sharp : m_flat;
+		Vec2 center = isSharp ? Vec2(735, 755) : Vec2(750, 897);
+		double scale = (isSharp ? 0.003 : 0.0038)*m_lineDiff;
+		center *= scale;
+		auto drawSignatures = [&](const std::vector<int> &signatures) {
+			double x = m_x + 50;
+			for each (int s in signatures) {
+				texture.scaled(scale).draw(Vec2(x, m_noteY[s]) - center);
+				x += m_lineDiff*0.9;
+			}
+		};
+		drawSignatures(m_keyType->higherKeySignatures());
+		drawSignatures(m_keyType->lowerKeySignatures());
+	}
 	Line(m_deadlineX, m_y, m_deadlineX, m_y + m_height).draw(3, Palette::Black);
+
 	for (int i = 0; ; i++) {
 		double x = noteOrigin + m_noteInterval*i;
 		if (m_notes.size() == i) {
