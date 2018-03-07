@@ -15,7 +15,7 @@ void Run() {
 	MIDIIn_GetDeviceName(0, name, 100);
 	MIDIIn* midiIn = MIDIIn_Open(name);
 	KeyType::Type keyType = (KeyType::Type)Random(KeyType::TypeCount - 1);
-	SimpleGame sg(0, 0, Window::Width(), Window::Height()*0.7, SP<KeyType>(new KeyType(keyType)), true, false, false);
+	SimpleGame sg(0, 0, Window::Width(), Window::Height()*0.7, SP<KeyType>(new KeyType(keyType)), false, false, false);
 	KeyboardView kv(0, Window::Height()*0.7, Window::Width(), Window::Height()*0.3);
 	while (System::Update()) {
 		while (true) {
