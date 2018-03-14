@@ -95,6 +95,7 @@ int NoteFlow::noteCount() {
 }
 
 int NoteFlow::frontNote() {
+	if (m_notes.size() <= m_headNoteIndex) return -1;
 	return m_notes[m_headNoteIndex];
 }
 
