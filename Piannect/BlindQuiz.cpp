@@ -41,7 +41,7 @@ void BlindQuiz::update() {
 }
 
 void BlindQuiz::push(int noteNumber) {
-	if (noteNumber != m_bf.note(0)) return;
+	if (noteNumber != m_bf.frontNote()) return;
 	m_bf.forward();
 }
 

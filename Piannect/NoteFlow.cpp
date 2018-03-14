@@ -94,8 +94,8 @@ int NoteFlow::noteCount() {
 	return m_notes.size();
 }
 
-int NoteFlow::note(int index) {
-	return m_notes[index];
+int NoteFlow::frontNote() {
+	return m_notes[m_headNoteIndex];
 }
 
 void NoteFlow::addNote(int noteNumber) {

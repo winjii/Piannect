@@ -51,7 +51,7 @@ public:
 
 	int noteCount();
 
-	int note(int index);
+	int frontNote();
 
 	void addNote(int noteNumber);
 
