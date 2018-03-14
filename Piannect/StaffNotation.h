@@ -28,6 +28,16 @@ public:
 	StaffNotation(double x, double y, double width, double height);
 
 	virtual void update();
+
+	double x();
+
+	double y();
+	
+	double width();
+
+	double height();
+
+	double noteToY(int note);
 };
 
 

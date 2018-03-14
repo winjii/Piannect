@@ -4,13 +4,7 @@
 
 namespace Piannect {
 
-
-double SimpleGame::getNoteOriginX() {
-	double value = m_noteTransition.value();
-	double r = m_noteTransition.easeOut(Easing::Quart);
-	return m_startX + (m_endX - m_startX)*r;
-}
-
+/*
 void SimpleGame::maintainBlacklist() {
 	if (!m_usesBlackList || m_blacklist.size() >= 5) return;
 	bool blacklisted[128] = {};
@@ -31,7 +25,7 @@ void SimpleGame::maintainBlacklist() {
 	}
 }
 
-SimpleGame::SimpleGame(double x, double y, double width, double height, SP<KeyType> keyType, bool modMode, bool usesBlackList, bool skipMode)
+SimpleGame::SimpleGame(double x, double y, double width, double height, SP<KeyType> keyType, bool modMode, bool usesBlackList, bool skipMode, bool blindMode)
 : StaffNotation(x, y, width, height)
 , m_notes()
 , m_deadlineX(x + 300)
@@ -47,13 +41,10 @@ SimpleGame::SimpleGame(double x, double y, double width, double height, SP<KeyTy
 , m_modMode(modMode)
 , m_usesBlackList(usesBlackList)
 , m_skipMode(skipMode)
+, m_blindMode(blindMode)
 , m_keyType(keyType)
 , m_sharp(U"sharp.png")
 , m_flat(U"flat.png") {
-
-	m_startX = m_deadlineX + m_noteInterval;
-	m_endX = m_deadlineX + m_noteInterval;
-	m_noteTransition = Transition(0s, 0s);
 	for (int i = 0; i < 128; i++) {
 		if (i < 60 - 12*2 || 60 + 12*3 < i) m_averageTimes[i] = 0.0;
 		else m_averageTimes[i] = 1e10;
@@ -84,11 +75,7 @@ void SimpleGame::push(int key) {
 		}
 	}
 
-	m_startX = getNoteOriginX();
-	m_endX = m_deadlineX - m_headNoteIndex*m_noteInterval;
-	m_headNoteIndex++;
-	m_noteTransition = Transition(5s, 0s);
-	m_watch.restart();
+	
 }
 
 void SimpleGame::update() {
@@ -103,35 +90,6 @@ void SimpleGame::update() {
 		}
 		return RandomSelect(candidate);
 	};
-
-	StaffNotation::update();
-	m_noteTransition.update(true);
-	double noteOrigin = getNoteOriginX();
-	while (noteOrigin - m_lineDiff/2 < m_deadlineX) {
-		m_notes.pop_front();
-		m_headNoteIndex--;
-		noteOrigin += m_noteInterval;
-		m_startX += m_noteInterval;
-		m_endX += m_noteInterval;
-	}
-
-	{
-		bool isSharp = m_keyType->isSharp();
-		Texture texture = isSharp ? m_sharp : m_flat;
-		Vec2 center = isSharp ? Vec2(735, 755) : Vec2(750, 897);
-		double scale = (isSharp ? 0.003 : 0.0038)*m_lineDiff;
-		center *= scale;
-		auto drawSignatures = [&](const std::vector<int> &signatures) {
-			double x = m_x + 50;
-			for each (int s in signatures) {
-				texture.scaled(scale).draw(Vec2(x, m_noteY[s]) - center);
-				x += m_lineDiff*0.9;
-			}
-		};
-		drawSignatures(m_keyType->higherKeySignatures());
-		drawSignatures(m_keyType->lowerKeySignatures());
-	}
-	Line(m_deadlineX, m_y, m_deadlineX, m_y + m_height).draw(3, Palette::Black);
 
 	for (int i = 0; ; i++) {
 		double x = noteOrigin + m_noteInterval*i;
@@ -160,25 +118,9 @@ void SimpleGame::update() {
 			}
 			else m_notes.push_back(RandomSelect(candidate));
 		}
-
-		int keyAsPos = m_notes[i];
-		if (m_keyType) keyAsPos = m_keyType->keyAsPosition(keyAsPos);
-		if (i < m_headNoteIndex) {
-			Circle(x, m_noteY[keyAsPos], m_lineDiff/2).draw(Palette::Red);
-		}
-		else if (m_isBlack[keyAsPos % 12]) {
-			Circle(x, m_noteY[keyAsPos], m_lineDiff/2).draw(Palette::Black);
-		}
-		else {
-			Circle(x, m_noteY[keyAsPos], m_lineDiff/2).draw(Palette::White);
-			Circle(x, m_noteY[keyAsPos], m_lineDiff/2).drawFrame(2, Palette::Black);
-		}
-		if (i == m_headNoteIndex) {
-			double t = std::min(1.0, m_watch.sF()/m_timeLimit);
-			//Circle(x, m_noteY[m_notes[i]], EaseIn(Easing::Cubic, 300.0, m_lineDiff/2, t)).drawFrame(1, Palette::Black);
-		}
 	}
 }
+*/
 
 
 }

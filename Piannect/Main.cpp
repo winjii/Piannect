@@ -1,7 +1,7 @@
 ﻿#include "StaffNotation.h"
 #include "KeyboardView.h"
 #include "NoteView.h"
-#include "SimpleGame.h"
+#include "BlindQuiz.h"
 
 namespace Piannect {
 
@@ -14,8 +14,7 @@ void Run() {
 	wchar_t name[100];
 	MIDIIn_GetDeviceName(0, name, 100);
 	MIDIIn* midiIn = MIDIIn_Open(name);
-	KeyType::Type keyType = (KeyType::Type)Random(KeyType::TypeCount - 1);
-	SimpleGame sg(0, 0, Window::Width(), Window::Height()*0.7, SP<KeyType>(new KeyType(keyType)), false, false, false);
+	BlindQuiz bq(0, 0, Window::Width(), Window::Height()*0.7, KeyType::RandomKey(), 5);
 	KeyboardView kv(0, Window::Height()*0.7, Window::Width(), Window::Height()*0.3);
 	while (System::Update()) {
 		while (true) {
@@ -23,16 +22,16 @@ void Run() {
 			int lLen = MIDIIn_GetMIDIMessage(midiIn, m, 256);
 			if (lLen == 0) break;
 			if ((m[0] >> 4) == 9 && m[2] > 0) {
-				int key = m[1];
-				sg.push(key);
-				kv.turnOn(key);
+				int note = m[1];
+				bq.push(note);
+				kv.turnOn(note);
 			}
 			if (((m[0] >> 4) == 9 && m[2] == 0) || (m[0] >> 4) == 8) {
-				int key = m[1];
-				kv.turnOff(key);
+				int note = m[1];
+				kv.turnOff(note);
 			}
 		}
-		sg.update();
+		bq.update();
 		kv.update();
 	}
 	MIDIIn_Close(midiIn);

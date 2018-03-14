@@ -61,5 +61,25 @@ void StaffNotation::update() {
 	}
 }
 
+double StaffNotation::x() {
+	return m_x;
+}
+
+double StaffNotation::y() {
+	return m_y;
+}
+
+double StaffNotation::width() {
+	return m_width;
+}
+
+double StaffNotation::height() {
+	return m_height;
+}
+
+double StaffNotation::noteToY(int note) {
+	return m_noteY[note];
+}
+
 
 }

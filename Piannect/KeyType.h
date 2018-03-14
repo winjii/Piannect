@@ -8,6 +8,8 @@ class KeyType {
 public:
 
 	enum Type {
+		None,
+
 		Cf,
 		C,
 		Cs,
@@ -40,13 +42,12 @@ public:
 		Bf_m,
 		B_m
 	};
-	static const int TypeCount = (int)Type::B_m + 1;
 
 private:
 
 	Type m_type;
 
-	std::array<int, 12> m_keyAsPosition;
+	std::array<int, 12> m_noteAsPosition;
 
 	std::array<bool, 12> m_isUsedKey;
 
@@ -56,25 +57,28 @@ private:
 
 public:
 
-	KeyType(Type type);
+	static KeyType RandomKey();
 
-	//調に含まれるkeyでない場合は-1を返す
-	//調の影響で臨時記号を使わずに白鍵のように表示できる場合、その白鍵としてのkeyを返す
-	//臨時記号を使わないとダメなkeyの場合、そのまま黒鍵としてのkeyを返す
-	int keyAsPosition(int key);
+	KeyType(Type type = Type::None);
 
-	//調に含まれるkeyかどうか判定する
-	bool isUsedKey(int key);
+	//Type==Noneなら常にnoteNumberをそのまま返す
+	//調に含まれないnote numberなら-1を返す
+	//調に含まれるなら、白鍵のように表示できるはずなのでその白鍵としてのnote numberを返す
+	int noteAsPosition(int noteNumber) const;
 
-	//ト音記号側の調合をkeyで返す
+	//Type==Noneなら常にtrue
+	//調に含まれるnote numberかどうか判定する
+	bool isUsedKey(int noteNumber) const;
+
+	//ト音記号側の調合をnote numberで返す
 	//左に書かれるべき調合から順に格納される
-	const std::vector<int>& higherKeySignatures();
+	const std::vector<int>& higherKeySignatures() const;
 
-	//ヘ音記号側の調合をkeyで返す
+	//ヘ音記号側の調合をnote numberで返す
 	//左に書かれるべき調合から順に格納される
-	const std::vector<int>& lowerKeySignatures();
+	const std::vector<int>& lowerKeySignatures() const;
 
-	bool isSharp();
+	bool isSharp() const;
 };
 
 

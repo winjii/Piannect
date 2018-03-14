@@ -4,13 +4,26 @@
 namespace Piannect {
 
 
+KeyType KeyType::RandomKey() {
+	return KeyType((Type)Random((int)1, (int)KeyType::B_m));
+}
+
 KeyType::KeyType(Type type)
 : m_type(type)
-, m_keyAsPosition()
+, m_noteAsPosition()
 , m_isUsedKey()
 , m_higherKeySignatures()
 , m_lowerKeySignatures()
 , m_isSharp() {
+
+	if (type == KeyType::None) {
+		m_isSharp = false;
+		for (int i = 0; i < 12; i++) {
+			m_isUsedKey[i] = true;
+			m_noteAsPosition[i] = i;
+		}
+		return;
+	}
 
 	using P = std::pair<int, int>;
 
@@ -18,7 +31,7 @@ KeyType::KeyType(Type type)
 		for (int i = 0; i < 7; i++) m_isUsedKey[indices[i]] = true;
 	};
 	auto setKeyAsPosition = [&](const std::array<const P, 7> &initList) {
-		for (int i = 0; i < 7; i++) m_keyAsPosition[initList[i].first] = initList[i].second;
+		for (int i = 0; i < 7; i++) m_noteAsPosition[initList[i].first] = initList[i].second;
 	};
 
 	std::array<int, 7> usedKeys; //Šî€‚Ì‰¹‚©‚ç‡‚É
@@ -218,30 +231,30 @@ KeyType::KeyType(Type type)
 	while (m_lowerKeySignatures.size() > signatureCount)
 		m_lowerKeySignatures.pop_back();
 	for (int i = 0; i < 12; i++) m_isUsedKey[i] = false;
-	for (int i = 0; i < 12; i++) m_keyAsPosition[i] = -1;
+	for (int i = 0; i < 12; i++) m_noteAsPosition[i] = -1;
 	for (int i = 0; i < 7; i++) {
 		m_isUsedKey[usedKeys[i]] = true;
-		m_keyAsPosition[usedKeys[i]] = usedKeys[i] - signatures[i];
+		m_noteAsPosition[usedKeys[i]] = usedKeys[i] - signatures[i];
 	}
 }
 
-int KeyType::keyAsPosition(int key) {
-	return (key/12)*12 + m_keyAsPosition[key % 12];
+int KeyType::noteAsPosition(int noteNumber) const {
+	return (noteNumber/12)*12 + m_noteAsPosition[noteNumber % 12];
 }
 
-bool KeyType::isUsedKey(int key) {
-	return m_isUsedKey[key % 12];
+bool KeyType::isUsedKey(int noteNumber) const {
+	return m_isUsedKey[noteNumber % 12];
 }
 
-const std::vector<int>& KeyType::higherKeySignatures() {
+const std::vector<int>& KeyType::higherKeySignatures() const {
 	return m_higherKeySignatures;
 }
 
-const std::vector<int>& KeyType::lowerKeySignatures() {
+const std::vector<int>& KeyType::lowerKeySignatures() const {
 	return m_lowerKeySignatures;
 }
 
-bool KeyType::isSharp() {
+bool KeyType::isSharp() const {
 	return m_isSharp;
 }
 
