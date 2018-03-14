@@ -5,7 +5,7 @@ namespace Piannect {
 
 
 KeyType KeyType::RandomKey() {
-	return KeyType((Type)Random((int)1, (int)KeyType::B_m));
+	return KeyType((Type)Random((int)KeyType::Cf, (int)KeyType::B_m));
 }
 
 KeyType::KeyType(Type type)
@@ -94,6 +94,8 @@ KeyType::KeyType(Type type)
 	case KeyType::Gf:
 		usedKeys = { 6, 8, 10, 11, 1, 3, 5 };
 		signatures = { -1, -1, -1, -1, -1, -1, 0 };
+		m_isSharp = false;
+		signatureCount = 6;
 		break;
 	case KeyType::G:
 		usedKeys = {7, 9, 11, 0, 2, 4, 6};
