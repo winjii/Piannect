@@ -31,7 +31,7 @@ public:
 class BlindQuiz {
 private:
 
-	BlindFlow m_bf;
+	BlindFlow m_noteFlow;
 
 public:
 

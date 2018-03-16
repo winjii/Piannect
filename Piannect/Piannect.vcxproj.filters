@@ -75,6 +75,12 @@
     <ClCompile Include="BlindQuiz.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="AbsolutePositionQuiz.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MidiInManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Image Include="App\icon.ico">
@@ -235,6 +241,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="BlindQuiz.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AbsolutePositionQuiz.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MidiInManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -199,11 +199,13 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AbsolutePositionQuiz.cpp" />
     <ClCompile Include="BlindQuiz.cpp" />
     <ClCompile Include="KeyboardUtil.cpp" />
     <ClCompile Include="KeyboardView.cpp" />
     <ClCompile Include="KeyType.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="MidiInManager.cpp" />
     <ClCompile Include="NoteFlow.cpp" />
     <ClCompile Include="NoteView.cpp" />
     <ClCompile Include="SimpleGame.cpp" />
@@ -267,10 +269,12 @@
     <Text Include="App\example\test.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AbsolutePositionQuiz.h" />
     <ClInclude Include="BlindQuiz.h" />
     <ClInclude Include="KeyboardUtil.h" />
     <ClInclude Include="KeyboardView.h" />
     <ClInclude Include="KeyType.h" />
+    <ClInclude Include="MidiInManager.h" />
     <ClInclude Include="NoteFlow.h" />
     <ClInclude Include="NoteView.h" />
     <ClInclude Include="SimpleGame.h" />
