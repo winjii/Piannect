@@ -5,7 +5,7 @@ namespace Piannect {
 
 
 AbsolutePositionQuiz::AbsolutePositionQuiz(double x, double y, double width, double height, SP<MidiIn> midiIn, bool modMode)
-: m_noteFlow(x, y, width, height*0.7, KeyType(KeyType::None),width/3)
+: m_noteFlow(x, y, width, height*0.7, KeyType(KeyType::None),width/10)
 , m_kv(x, y + height*0.7, width, height*0.3)
 , m_midiIn(midiIn)
 , m_modMode(modMode) {
@@ -17,7 +17,7 @@ void AbsolutePositionQuiz::update() {
 	m_midiIn->update();
 	m_kv.update();
 
-	while (m_noteFlow.noteCount() < 3)
+	while (m_noteFlow.noteCount() < 10)
 		m_noteFlow.addNote(Random(60 - 12*2, 60 + 12*3));
 	m_noteFlow.update();
 }

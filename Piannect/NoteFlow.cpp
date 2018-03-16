@@ -99,6 +99,11 @@ int NoteFlow::frontNote() {
 	return m_notes[m_headNoteIndex];
 }
 
+int NoteFlow::backNote() {
+	if (m_notes.size() <= m_headNoteIndex) return -1;
+	return m_notes.back();
+}
+
 void NoteFlow::addNote(int noteNumber) {
 	m_notes.push_back(noteNumber);
 }

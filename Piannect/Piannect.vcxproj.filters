@@ -81,6 +81,9 @@
     <ClCompile Include="MidiIn.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="RelativePositionQuiz.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Image Include="App\icon.ico">
@@ -247,6 +250,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="MidiIn.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="RelativePositionQuiz.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

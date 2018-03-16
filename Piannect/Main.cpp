@@ -4,6 +4,7 @@
 #include "BlindQuiz.h"
 #include "MidiIn.h"
 #include "AbsolutePositionQuiz.h"
+#include "RelativePositionQuiz.h"
 
 namespace Piannect {
 
@@ -15,7 +16,8 @@ void Run() {
 	if (n == 0) throw "MIDIデバイスが接続されていない";
 	SP<MidiIn> midiIn = MidiIn::Create(MidiIn::DeviceName(0));
 	//BlindQuiz game(0, 0, Window::Width(), Window::Height(), KeyType::RandomKey(), 3, midiIn);
-	AbsolutePositionQuiz game(0, 0, Window::Width(), Window::Height(), midiIn, true);
+	//AbsolutePositionQuiz game(0, 0, Window::Width(), Window::Height(), midiIn, true);
+	RelativePositionQuiz game(0, 0, Window::Width(), Window::Height(), KeyType::RandomKey(), midiIn);
 	while (System::Update()) {
 		game.update();
 	}

@@ -53,6 +53,8 @@ public:
 
 	int frontNote();
 
+	int backNote();
+
 	void addNote(int noteNumber);
 
 };

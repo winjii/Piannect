@@ -208,6 +208,7 @@
     <ClCompile Include="MidiIn.cpp" />
     <ClCompile Include="NoteFlow.cpp" />
     <ClCompile Include="NoteView.cpp" />
+    <ClCompile Include="RelativePositionQuiz.cpp" />
     <ClCompile Include="SimpleGame.cpp" />
     <ClCompile Include="StaffNotation.cpp" />
     <ClCompile Include="stdafx.cpp">
@@ -277,6 +278,7 @@
     <ClInclude Include="MidiIn.h" />
     <ClInclude Include="NoteFlow.h" />
     <ClInclude Include="NoteView.h" />
+    <ClInclude Include="RelativePositionQuiz.h" />
     <ClInclude Include="SimpleGame.h" />
     <ClInclude Include="StaffNotation.h" />
     <ClInclude Include="stdafx.h" />
