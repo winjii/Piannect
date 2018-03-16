@@ -12,15 +12,15 @@ private:
 	bool m_isOn[88];
 
 
-	void setIsOn(int key, bool value);
+	void setIsOn(int noteNumber, bool value);
 
 public:
 
 	KeyboardView(double x, double y, double width, double height);
 
-	void turnOn(int key);
+	void turnOn(int noteNumber);
 
-	void turnOff(int key);
+	void turnOff(int noteNumber);
 
 	void update();
 

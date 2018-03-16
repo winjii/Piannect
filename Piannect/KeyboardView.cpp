@@ -5,12 +5,12 @@
 namespace Piannect {
 
 
-void KeyboardView::setIsOn(int key, bool value) {
-	key -= 36;
-	if (key < 0 || 88 < key) return;
-	int octave = key/12;
-	int pitch = key % 12;
-	m_isOn[key] = value;
+void KeyboardView::setIsOn(int noteNumber, bool value) {
+	noteNumber -= 36;
+	if (noteNumber < 0 || 88 < noteNumber) return;
+	int octave = noteNumber/12;
+	int pitch = noteNumber % 12;
+	m_isOn[noteNumber] = value;
 }
 
 KeyboardView::KeyboardView(double x, double y, double width, double height)
@@ -19,14 +19,15 @@ KeyboardView::KeyboardView(double x, double y, double width, double height)
 , m_width(width)
 , m_height(height)
 , m_isOn() {
+
 }
 
-void KeyboardView::turnOn(int key) {
-	setIsOn(key, true);
+void KeyboardView::turnOn(int noteNumber) {
+	setIsOn(noteNumber, true);
 }
 
-void KeyboardView::turnOff(int key) {
-	setIsOn(key, false);
+void KeyboardView::turnOff(int noteNumber) {
+	setIsOn(noteNumber, false);
 }
 
 void KeyboardView::update() {

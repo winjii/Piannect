@@ -205,7 +205,7 @@
     <ClCompile Include="KeyboardView.cpp" />
     <ClCompile Include="KeyType.cpp" />
     <ClCompile Include="Main.cpp" />
-    <ClCompile Include="MidiInManager.cpp" />
+    <ClCompile Include="MidiIn.cpp" />
     <ClCompile Include="NoteFlow.cpp" />
     <ClCompile Include="NoteView.cpp" />
     <ClCompile Include="SimpleGame.cpp" />
@@ -274,7 +274,7 @@
     <ClInclude Include="KeyboardUtil.h" />
     <ClInclude Include="KeyboardView.h" />
     <ClInclude Include="KeyType.h" />
-    <ClInclude Include="MidiInManager.h" />
+    <ClInclude Include="MidiIn.h" />
     <ClInclude Include="NoteFlow.h" />
     <ClInclude Include="NoteView.h" />
     <ClInclude Include="SimpleGame.h" />

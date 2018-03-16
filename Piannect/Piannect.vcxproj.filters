@@ -78,7 +78,7 @@
     <ClCompile Include="AbsolutePositionQuiz.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="MidiInManager.cpp">
+    <ClCompile Include="MidiIn.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -246,7 +246,7 @@
     <ClInclude Include="AbsolutePositionQuiz.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="MidiInManager.h">
+    <ClInclude Include="MidiIn.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

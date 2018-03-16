@@ -7,12 +7,18 @@ namespace Piannect {
 
 
 
-BlindQuiz::BlindQuiz(double x, double y, double width, double height, const KeyType & keyType, int maxSize)
-: m_noteFlow(x, y, width, height, keyType, maxSize) {
-
+BlindQuiz::BlindQuiz(double x, double y, double width, double height, const KeyType & keyType, int maxSize, SP<MidiIn> midiIn)
+: m_noteFlow(x, y, width, height*0.7, keyType, maxSize)
+, m_kv(x, y + height*0.7, width, height*0.3)
+, m_midiIn(midiIn) {
+	m_midiIn->addHandler(SP<MidiIn::ITurnOnHandler>((MidiIn::ITurnOnHandler*)this));
+	m_midiIn->addHandler(SP<MidiIn::ITurnOffHandler>((MidiIn::ITurnOffHandler*)this));
 }
 
 void BlindQuiz::update() {
+	m_midiIn->update();
+	m_kv.update();
+
 	//ranges: ”¼ŠJ‹æŠÔ
 	auto randomSelect = [&](const std::vector<std::pair<int, int>> &ranges) {
 		std::vector<int> candidate;
@@ -40,9 +46,14 @@ void BlindQuiz::update() {
 	m_noteFlow.update();
 }
 
-void BlindQuiz::push(int noteNumber) {
-	if (noteNumber != m_noteFlow.frontNote()) return;
-	m_noteFlow.forward();
+void BlindQuiz::onTurnOn(int noteNumber) {
+	if (noteNumber == m_noteFlow.frontNote())
+		m_noteFlow.forward();
+	m_kv.turnOn(noteNumber);
+}
+
+void BlindQuiz::onTunrOff(int noteNumber) {
+	m_kv.turnOff(noteNumber);
 }
 
 }

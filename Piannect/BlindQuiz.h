@@ -1,5 +1,7 @@
 #pragma once
 #include "NoteFlow.h"
+#include "MidiIn.h"
+#include "KeyboardView.h"
 
 
 namespace Piannect {
@@ -28,18 +30,26 @@ public:
 };
 
 
-class BlindQuiz {
+class BlindQuiz : MidiIn::ITurnOnHandler, MidiIn::ITurnOffHandler {
 private:
 
 	BlindFlow m_noteFlow;
 
+	KeyboardView m_kv;
+
+	SP<MidiIn> m_midiIn;
+
 public:
 
-	BlindQuiz(double x, double y, double width, double height, const KeyType &keyType, int maxSize);
+	BlindQuiz(double x, double y, double width, double height, const KeyType &keyType, int maxSize, SP<MidiIn> midiIn);
 
 	void update();
 
-	void push(int noteNumber);
+	// ITurnOnHandler ÇâÓÇµÇƒåpè≥Ç≥ÇÍÇ‹ÇµÇΩ
+	virtual void onTurnOn(int noteNumber) override;
+
+	// ITurnOffHandler ÇâÓÇµÇƒåpè≥Ç≥ÇÍÇ‹ÇµÇΩ
+	virtual void onTunrOff(int noteNumber) override;
 };
 
 
