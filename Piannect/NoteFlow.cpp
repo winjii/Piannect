@@ -29,6 +29,10 @@ double NoteFlow::CalcDeadlinePos() {
 	return 300;
 }
 
+SP<NoteFlow> NoteFlow::Create(const NoteFlow &base, const KeyType & keyType) {
+	return SP<NoteFlow>(new NoteFlow(base.m_x, base.m_y, base.m_width, base.m_height, keyType, base.m_noteInterval));
+}
+
 NoteFlow::NoteFlow(double x, double y, double width, double height, const KeyType &keyType, double noteInterval)
 	: StaffNotation(x, y, width, height)
 	, m_notes()

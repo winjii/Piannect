@@ -10,7 +10,9 @@ namespace Piannect {
 class RelativePositionQuiz : MidiIn::ITurnOnHandler, MidiIn::ITurnOffHandler {
 private:
 
-	NoteFlow m_noteFlow;
+	RectF m_v;
+
+	SP<NoteFlow> m_noteFlow;
 
 	KeyboardView m_kv;
 
@@ -20,8 +22,9 @@ public:
 
 	RelativePositionQuiz(double x, double y, double width, double height, const KeyType &key, SP<MidiIn> midiIn);
 
-	void update();
+	RelativePositionQuiz(double x, double y, double width, double height, SP<MidiIn> midiIn);
 
+	void update();
 
 	// ITurnOnHandler ÇâÓÇµÇƒåpè≥Ç≥ÇÍÇ‹ÇµÇΩ
 	virtual void onTurnOn(int noteNumber) override;

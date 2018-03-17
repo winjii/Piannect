@@ -6,7 +6,7 @@
 namespace Piannect {
 
 
-class NoteFlow : StaffNotation {
+class NoteFlow : public StaffNotation {
 protected:
 
 	std::deque<int> m_notes;
@@ -38,6 +38,8 @@ protected:
 public:
 
 	static double CalcDeadlinePos();
+
+	static SP<NoteFlow> Create(const NoteFlow &base, const KeyType &keyType);
 
 	NoteFlow(double x, double y, double width, double height, const KeyType &keyType, double noteInterval);
 

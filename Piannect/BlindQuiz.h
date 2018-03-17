@@ -19,6 +19,10 @@ private:
 
 public:
 
+	static SP<BlindFlow> Create(const BlindFlow &base, const KeyType &key) {
+		return SP<BlindFlow>(new BlindFlow(base.m_x, base.m_y, base.m_width, base.m_height, key, base.m_maxSize));
+	}
+
 	BlindFlow(double x, double y, double width, double height, const KeyType &keyType, int maxSize)
 	: NoteFlow(x, y, width, height, keyType, (width - NoteFlow::CalcDeadlinePos())/(maxSize + 1))
 	, m_maxSize(maxSize) {
@@ -33,7 +37,7 @@ public:
 class BlindQuiz : MidiIn::ITurnOnHandler, MidiIn::ITurnOffHandler {
 private:
 
-	BlindFlow m_noteFlow;
+	SP<BlindFlow> m_noteFlow;
 
 	KeyboardView m_kv;
 
