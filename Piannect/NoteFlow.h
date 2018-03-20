@@ -29,6 +29,8 @@ protected:
 
 	Texture m_flat;
 
+	int m_lastNote;
+
 
 
 	double getNoteOriginX();
@@ -53,9 +55,11 @@ public:
 
 	int noteCount();
 
+	//‚Ü‚¾Á‚³‚ê‚Ä‚¢‚È‚¢‰¹•„‚Ì‚¤‚¿æ“ª‚Ì‚à‚Ì
 	int frontNote();
 
-	int backNote();
+	//ÅŒã‚É‚ ‚é or ÅŒã‚É‚ ‚Á‚½‰¹•„
+	int lastNote();
 
 	void addNote(int noteNumber);
 

@@ -36,13 +36,14 @@ void BlindQuiz::update() {
 
 	if (m_noteFlow->frontNote() == -1) {
 		using PII = std::pair<int, int>;
-		int lastKey = randomSelect({PII(60 - 2*12, 60 + 3*12 + 1)});
+		int lastNote = m_noteFlow->lastNote();
+		if (lastNote == -1) lastNote = randomSelect({PII(60 - 2*12, 60 + 3*12 + 1)});
 		for (int i = 0; i < m_noteFlow->maxSize(); i++) {
-			int newKey;
-			PII r(std::max(60 - 2*12,  lastKey - 12), std::min(60 + 3*12 + 1, lastKey + 12 + 1));
-			newKey = randomSelect({r});
-			m_noteFlow->addNote(newKey);
-			lastKey = newKey;
+			int newNote;
+			PII r(std::max(60 - 2*12,  lastNote - 12), std::min(60 + 3*12 + 1, lastNote + 12 + 1));
+			newNote = randomSelect({r});
+			m_noteFlow->addNote(newNote);
+			lastNote = newNote;
 		}
 		m_noteFlow->show();
 	}

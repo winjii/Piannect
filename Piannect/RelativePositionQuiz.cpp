@@ -36,7 +36,7 @@ void RelativePositionQuiz::update() {
 		return RandomSelect(candidate);
 	};
 	while (m_noteFlow->noteCount() < 15) {
-		int lastKey = m_noteFlow->backNote();
+		int lastKey = m_noteFlow->lastNote();
 		if (lastKey == -1) lastKey = 60;
 		PII r(std::max(60 - 2*12, lastKey - 12), std::min(60 + 3*12 + 1, lastKey + 12 + 1));
 		m_noteFlow->addNote(randomSelect({r}));

@@ -45,7 +45,8 @@ NoteFlow::NoteFlow(double x, double y, double width, double height, const KeyTyp
 	, m_watch(true)
 	, m_keyType(keyType)
 	, m_sharp(U"sharp.png")
-	, m_flat(U"flat.png") {
+	, m_flat(U"flat.png")
+	, m_lastNote(-1) {
 
 	m_startX = m_deadlineX + m_noteInterval;
 	m_endX = m_deadlineX + m_noteInterval;
@@ -103,13 +104,13 @@ int NoteFlow::frontNote() {
 	return m_notes[m_headNoteIndex];
 }
 
-int NoteFlow::backNote() {
-	if (m_notes.size() <= m_headNoteIndex) return -1;
-	return m_notes.back();
+int NoteFlow::lastNote() {
+	return m_lastNote;
 }
 
 void NoteFlow::addNote(int noteNumber) {
 	m_notes.push_back(noteNumber);
+	m_lastNote = noteNumber;
 }
 
 double NoteFlow::elapsedTime() {
