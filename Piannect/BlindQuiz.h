@@ -12,8 +12,10 @@ private:
 
 	int m_maxSize;
 
+	bool m_hidden;
+
 	void drawNote(int index) override {
-		if ((0 < m_headNoteIndex || m_notes.size() < m_maxSize) && m_headNoteIndex <= index) return;
+		if (m_hidden && m_headNoteIndex <= index) return;
 		NoteFlow::drawNote(index);
 	}
 
@@ -30,6 +32,10 @@ public:
 	}
 
 	int maxSize() { return m_maxSize; }
+
+	void hide() { m_hidden = true; }
+
+	void show() { m_hidden = false; }
 
 };
 

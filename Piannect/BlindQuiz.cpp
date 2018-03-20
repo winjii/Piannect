@@ -34,7 +34,7 @@ void BlindQuiz::update() {
 		return RandomSelect(candidate);
 	};
 
-	if (m_noteFlow->noteCount() == 0) {
+	if (m_noteFlow->frontNote() == -1) {
 		using PII = std::pair<int, int>;
 		int lastKey = randomSelect({PII(60 - 2*12, 60 + 3*12 + 1)});
 		for (int i = 0; i < m_noteFlow->maxSize(); i++) {
@@ -44,14 +44,17 @@ void BlindQuiz::update() {
 			m_noteFlow->addNote(newKey);
 			lastKey = newKey;
 		}
+		m_noteFlow->show();
 	}
 
 	m_noteFlow->update();
 }
 
 void BlindQuiz::onTurnOn(int noteNumber) {
-	if (noteNumber == m_noteFlow->frontNote())
+	if (noteNumber == m_noteFlow->frontNote()) {
 		m_noteFlow->forward();
+		m_noteFlow->hide();
+	}
 	m_kv.turnOn(noteNumber);
 }
 
