@@ -13,7 +13,7 @@ StaffNotation::StaffNotation(double x, double y, double width, double height)
 , m_centerY()
 , m_noteY() {
 	m_lineDiff = height/20;
-	m_centerY = y + height/2;
+	m_centerY = y + height/2 + m_lineDiff*2;
 	//‚»‚Ì‰¹‚©‚çŸ‚Ì‰¹‚És‚­‚Ç‚Ì‚­‚ç‚¢ˆÊ’u‚ªã‚ª‚é‚©
 	int d[12] = { 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 2 };
 	m_noteY[m_centerKey] = m_centerY;
